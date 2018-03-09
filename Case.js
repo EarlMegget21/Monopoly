@@ -15,10 +15,10 @@ class Case{
     }
 
     function getNom(){
-    return nom;
+    return this.nom;
     }
 
     function getCouleur(){
-    return couleur;
+    return this.couleur;
     }
 }
