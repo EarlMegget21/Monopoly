@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monopoly</title>
+    <!--<script type="javascript" src="file:///C:/Users/rudtu/WebstormProjects/Monopoly/Plateau.js" defer></script>-->
+</head>
+<body>
+<script>
+    class Plateau{
+        static initDisplay(){
+            var plateau=document.createElement('div');
+            plateau.style.height='715px';
+            plateau.style.width='715px';
+            plateau.style.flexDirection='column';
+            for(let i=0;i<11;i++){
+                let ligne=document.createElement('div');
+                plateau.style.display='flex';
+                plateau.style.flexDirection='horizontal';
+                ligne.style.backgroundColor='magenta';
+                ligne.style.display='flex';
+                ligne.style.alignItems='center';
+                ligne.style.justifyContent='space-around';
+                ligne.style.height='65px';
+                for(let j=0;j<11;j++){
+                    let col=document.createElement('div');
+                    plateau.style.display='flex';
+                    col.style.width='60px';
+                    col.style.height='60px';
+                    if(i%10==0 || j%10==0) {
+                        col.style.backgroundColor = 'blue';
+                    }
+                    if(i==8 && (j==3 || j==7)){
+                        if(j==3){
+                            col.innerText="Caisse";
+                        }
+                        if(j==7){
+                            col.innerText="Chance";
+                        }
+                        col.style.border="dotted";
+                    }
+                    ligne.appendChild(col);
+                }
+                plateau.appendChild(ligne);
+            }
+            document.getElementsByTagName('body')[0].appendChild(plateau);
+        }
+    }
+    Plateau.initDisplay();
+</script>
+</body>
+</html>
