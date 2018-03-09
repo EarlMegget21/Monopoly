@@ -4,8 +4,8 @@ var argent
 var position
 var prison
 
-constructor(pseudo, argent){
-this.pseudo = pseudo;
+constructor(couleur, argent){
+this.pseudo = couleur;
 this.argent=argent;
 position = 0;
 prison = 0;

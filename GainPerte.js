@@ -9,7 +9,7 @@ class GainPerte extends Case{
         }
     }
 
-    effect(){
+    effect(joueur){
         //TODO: Ajouter this.valeur à l'argent du joueur
     }
 }

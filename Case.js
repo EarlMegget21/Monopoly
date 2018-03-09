@@ -5,8 +5,4 @@ class Case{
     constructor(node){
         this.node = node
     }
-
-    effect(){
-        //TODO: Ne fait rien - Appelle NextPlayer
-    }
 }
