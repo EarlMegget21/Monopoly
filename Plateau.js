@@ -1,4 +1,17 @@
 class Plateau{
+	static var current = 0
+	static var cases
+	static var tabjoueur
+
+
+	static init(){
+	cases = new Array(40);
+
+	tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
+	//appeler function Rudy
+
+	}
+
     static initDisplay(){
         var plateau=document.createElement('div');
         plateau.style.backgroundColor=red;
@@ -15,4 +28,3 @@ class Plateau{
         document.getElementsByTagName('body')[0].appendChild(plateau);
     }
 }
-Plateau.initDisplay();alert('oui');
