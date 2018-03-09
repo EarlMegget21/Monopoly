@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monopoly</title>
+    <!--<script type="javascript" src="file:///C:/Users/rudtu/WebstormProjects/Monopoly/Plateau.js" defer></script>-->
+</head>
+<body>
+<script>
+    class Plateau{
+        static var current = 0
+        static var cases
+        static var tabjoueur
+
+        static init(){
+            cases = new Array(40);
+
+            tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
+            //appeler function Rudy
+
+        }
+
+        static initDisplay(){
+
+            var plateau=document.createElement('div');
+            plateau.style.height='715px';
+            plateau.style.width='715px';
+            plateau.style.flexDirection='column';
+
+            for(let i=0;i<11;i++){ //Lignes
+
+                let ligne=document.createElement('div');
+                plateau.style.display='flex';
+                plateau.style.flexDirection='horizontal';
+                ligne.style.backgroundColor='magenta';
+                ligne.style.display='flex';
+                ligne.style.alignItems='center';
+                ligne.style.justifyContent='space-around';
+                ligne.style.height='65px';
+
+                for(let j=0;j<11;j++){ //Cases
+
+                    let col=document.createElement('div');
+                    plateau.style.display='flex';
+                    col.style.width='60px';
+                    col.style.height='60px';
+                    if(i%10==0 || j%10==0) { //si c'est une case jouable
+
+                        if(i+j>13){
+                            let box=cases[i+j];
+                            col.innerText=box.getNom();
+                            col.style.backgroundColor=box.getCouleur();
+                            box.setNode(col);
+                        }
+                        //// ajouter pour la moitié des cases restantes et ajouter couleurs joueurs puis gérer affichage des évènements
+                    }
+
+                    if(i==8 && (j==3 || j==7)){ //cartes spéciales
+                        if(j==3){
+                            col.innerText="Caisse";
+                        }
+                        if(j==7){
+                            col.innerText="Chance";
+                        }
+                        col.style.border="dotted";
+                    }
+
+
+                    ligne.appendChild(col);
+
+                }
+
+                plateau.appendChild(ligne);
+
+            }
+
+            document.getElementsByTagName('body')[0].appendChild(plateau);
+
+        }
+    }
+    Plateau.initDisplay();
+</script>
+</body>
+</html>
