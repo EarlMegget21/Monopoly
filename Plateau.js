@@ -6,7 +6,13 @@ class Plateau{
 
 	static init(){
 	cases = new Array(40);
-
+	var x = 0
+	cases.foreach(function(item){
+	item = new Terrain(null,200,50,"c'est bleu ?","rue "+x);
+	x+=1
+	});
+	
+	cases[0] = new GainPerte
 	tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
 	//appeler function Rudy
 

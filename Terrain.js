@@ -6,6 +6,8 @@ class Terrain extends Case{
         this.loyer = loyer
         this.couleur = couleur
         this.propriétaire = null
+        this.nom = nom
+        this.couleur = couleur
     }
 
     effect(joueur){
