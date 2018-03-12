@@ -11,6 +11,6 @@ class GainPerte extends Case{
     }
 
     effect(joueur){
-        //TODO: Ajouter this.valeur à l'argent du joueur
+        joueur.argent += this.valeur
     }
 }
