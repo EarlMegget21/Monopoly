@@ -1,8 +1,4 @@
 class Joueur{
-var pseudo
-var argent
-var position
-var prison
 
 constructor(couleur, argent){
 this.pseudo = couleur;
