@@ -1,18 +1,27 @@
 class Terrain extends Case{
 
-    constructor(node, prixAchat, loyer, couleur){
-        this.node = node
-        this.prixAchat = prixAchat
+    constructor(nom, couleur, prixAchat, loyer) {
+        super(nom, couleur)
+        this.valeur = valeur
         this.loyer = loyer
-        this.couleur = couleur
         this.propriétaire = null
-        this.nom = nom
-        this.couleur = couleur
     }
 
-    effect(joueur){
+    function getValeur(){
+        return this.valeur
+    }
+
+    function getLoyer(){
+        return this.loyer
+    }
+
+    function getPropriétaire(){
+        return this.propriétaire
+    }
+
+    function effect(joueur){
         if(this.propriétaire == null){
-            acheterTerrain(joueur)
+            this.acheterTerrain(joueur)
         }else{
             Console.log("Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " +  this.propriétaire.couleur)
             joueur.argent -= this.loyer
@@ -20,14 +29,14 @@ class Terrain extends Case{
         }
     }
 
-    acheterTerrain(joueur){
-        Console.log("Le terrain coûte " + this.prixAchat + "€")
-        if(joueur.argent >= this.prixAchat) {
+    function acheterTerrain(joueur){
+        Console.log("Le terrain coûte " + this.valeur + "€")
+        if(joueur.argent >= this.valeur) {
             Console.log("Voulez-vous l'acheter ?")
             //TODO: Faire apparaître 2 boutons "Oui" et "Non"
             if (true) {   //TODO: Remplacer "true" par le retour du clic bouton
                 this.propriétaire = joueur
-                joueur.argent -= this.prixAchat
+                joueur.argent -= this.valeur
             }
         }else{
             Console.log("Vous ne pouvez pas l'acheter")

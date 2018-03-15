@@ -1,22 +1,23 @@
-function Case(node, nom, couleur){
+class Case{
 
-    this.node = node
-    this.nom = nom
-    this.couleur = couleur
+    constructor(nom, couleur) {
+        this.nom = nom
+        this.couleur = couleur
+    }
 
-    this.getNode = function(){
+    function getNode(){
         return this.node;
     }
 
-    this.setNode = function(node){
+   function setNode(node){
         this.node = node;
     }
 
-    this.getNom = function(){
+    function getNom(){
         return this.nom;
     }
 
-    this.getCouleur = function(){
+    function getCouleur(){
         return this.couleur;
     }
 }

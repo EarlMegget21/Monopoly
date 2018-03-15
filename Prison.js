@@ -1,6 +1,6 @@
 class Prison extends Case{
 
-    effect(joueur){
+    function effect(joueur){
         joueur.prison = 3
     }
 }
