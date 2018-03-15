@@ -8,82 +8,105 @@ class Plateau{
 
         for(var i=0; i < 40; i++){
             if(i === 0){
-                Plateau.cases[i] = new GainPerte("Départ","White",200)
-            }else if ( i === 4 || i === 17 || i === 33){//Trésors
-                Plateau.cases[i] = new Tresors("Trésor","none")
-            }else if( i === 12 || i === 21 || i === 28){//Taxe
-                Plateau.cases[i] = new GainPerte("Taxe","none",-200)
-            }else if ( i === 38 || i === 22 || i === 7){//Chance
+                Plateau.cases[i] = new GainPerte("Départ", "none",200)
+            }else if ( i === 3 || i === 17 || i === 32){ //Caisse de Communauté
+                Plateau.cases[i] = new Tresors("Caisse", "none")
+            }else if( i === 12 || i === 28){ //Taxe
+                Plateau.cases[i] = new GainPerte("Taxe", "none",-200)
+            }else if ( i === 38 || i === 22 || i === 7){ //Chance
                 Plateau.cases[i] = new Chance("Chance")
             }else if (i === 30){//Prison
-                Plateau.cases[i] = new Prison("Allez en prison","none")
-            }else if (i === 10){//Visit prison
-                Plateau.cases[i] = new Case("Visit en Prison","none")
+                Plateau.cases[i] = new Prison("Allez en prison", "none")
+            }else if (i === 10){//Simple Visite
+                Plateau.cases[i] = new Case("Simple Visite", "none")
+            }else if (i === 20){//Parc Gratuit
+                Plateau.cases[i] = new Case("Parc Gratuit", "none")
             }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
-                Plateau.cases[i] = new Terrain("Gare","Black",200,100)
+                Plateau.cases[i] = new Terrain("Gare", "grey", 200, 100)
+            }else if (i<5){
+                Plateau.cases[i] = new Terrain("Terrains 1", "#9e6235", 100+((i+1)*20), ((i+1)*20))
             }else if (i<10){
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"blue",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 2", "#82fcff", 100+((i+1)*20), ((i+1)*20))
+            }else if (i<15){
+                Plateau.cases[i] = new Terrain("Terrains 3", "#d972db", 100+((i+1)*20), ((i+1)*20))
             }else if (i<20){
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"orange",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 4", "orange", 100+((i+1)*20), ((i+1)*20))
+            }else if (i<25){
+                Plateau.cases[i] = new Terrain("Terrains 5", "#db7272", 100+((i+1)*20), ((i+1)*20))
             }else if (i<30){
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"yellow",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 6", "#dbd96b", 100+((i+1)*20), ((i+1)*20))
+            }else if (i<35){
+                Plateau.cases[i] = new Terrain("Terrains 7", "#72db7f", 100+((i+1)*20), ((i+1)*20))
             }else{
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"red",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 8", "#8284ff", 100+((i+1)*20), ((i+1)*20))
             }
         }
 
-        //TODO: appeler function Rudy
+        Plateau.initDisplay();
 
     }
 
     static initDisplay(){
 
         var plateau=document.createElement('div');
-        plateau.style.height='715px';
-        plateau.style.width='715px';
+        plateau.style.display='flex';
         plateau.style.flexDirection='column';
+        plateau.style.height="715px";
 
         for(let i=0;i<11;i++){ //Lignes
 
             let ligne=document.createElement('div');
-            plateau.style.display='flex';
-            plateau.style.flexDirection='horizontal';
-            ligne.style.backgroundColor='magenta';
+            ligne.style.backgroundColor='#b1ccba';
             ligne.style.display='flex';
-            ligne.style.alignItems='center';
-            ligne.style.justifyContent='space-around';
-            ligne.style.height='65px';
+            ligne.style.alignItems='stretch';
+            ligne.style.flexGrow='1';
 
-            for(let j=0;j<11;j++){ //Plateau.cases
+            for(let j=0;j<11;j++){ //cases
 
                 let col=document.createElement('div');
-                plateau.style.display='flex';
                 col.style.width='60px';
-                col.style.height='60px';
+                col.style.flexGrow='1';
+                col.style.border="solid";
+                col.style.borderColor="transparent";
+
                 if(i%10===0 || j%10===0) { //si c'est une case jouable
 
-                    let nom=document.createElement('p');
-                    let prix=document.createElement('p');
+                    let nom=document.createElement('div');
+                    let prix=document.createElement('div');
                     let pions=document.createElement('div');
+
                     let p1=document.createElement('div');
                     p1.style.backgroundColor='red';
-                    p1.setAttribute('id', 'p1');
+                    //p1.setAttribute('id', 'p1');
+
                     let p2=document.createElement('div');
                     p2.style.backgroundColor='blue';
-                    p1.setAttribute('id', 'p2');
+                    //p1.setAttribute('id', 'p2');
+
                     let p3=document.createElement('div');
                     p3.style.backgroundColor='yellow';
-                    p1.setAttribute('id', 'p3');
+                    //p1.setAttribute('id', 'p3');
+
                     let p4=document.createElement('div');
                     p4.style.backgroundColor='green';
-                    p1.setAttribute('id', 'p4');
+                    //p1.setAttribute('id', 'p4');
 
-                    if(i+j<=20){ //20 premières Plateau.cases
+                    pions.appendChild(p1);
+                    pions.appendChild(p2);
+                    pions.appendChild(p3);
+                    pions.appendChild(p4);
+
+
+                    if(i===0 || j===10){//20 premières cases
                         let box=Plateau.cases[i+j];
+
+                        if(box instanceof Terrain == false){
+                            col.style.borderColor="black";
+                        }
 
                         nom.innerText=box.getNom();
 
-                        if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
+                        if(box.hasOwnProperty('valeur')){
                             prix.innerText=box.getValeur();
                         }
 
@@ -93,10 +116,15 @@ class Plateau{
                         col.style.backgroundColor=box.getCouleur();
                         box.setNode(col);
                     }else{ //20 dernières
-                        let box=Plateau.cases[40-i];
+                        let box=Plateau.cases[40-(j+i)];
+
+                        if(box instanceof Terrain == false){
+                            col.style.borderColor="black";
+                        }
+
                         col.innerText=box.getNom();
 
-                        if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
+                        if(box.hasOwnProperty('valeur')){
                             prix.innerText=box.getValeur();
                         }
 
@@ -133,5 +161,4 @@ class Plateau{
 
 }
 
-Plateau.init()
-Plateau.initDisplay()
+Plateau.init();
