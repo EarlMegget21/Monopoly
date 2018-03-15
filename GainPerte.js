@@ -6,7 +6,11 @@ class GainPerte extends Case{
     }
 
     effect(joueur){
-        joueur.argent += this.valeur
+        if(this.valeur < 0){
+            joueur.retirerSous(this.valeur * -1)
+        }else{
+            joueur.ajouterSous(this.valeur)
+        }
     }
 
     getValeur(){

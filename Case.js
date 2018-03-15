@@ -20,4 +20,8 @@ class Case{
     getCouleur(){
         return this.couleur;
     }
+
+    effect(joueur){
+        //Do Nothing
+    }
 }
