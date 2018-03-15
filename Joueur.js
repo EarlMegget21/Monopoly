@@ -5,15 +5,12 @@ class Joueur{
         this.argent=argent;
         this.position = 0;
         this.prison = 0;
+        this.aPerdu = false
     }
 
     lancerDe(){
-        let de1 = Math.floor(Math.random()*6)+1;
-        let de2 = Math.floor(Math.random()*6)+1;
-        if(de1 == de2){
-            de1+=lancerDe();
-        }
-        return de1+de2;
+        let de = Math.floor(Math.random()*10)+2;
+        return de
     }
 
     retirerSous(valeur){
@@ -27,6 +24,17 @@ class Joueur{
     ajouterSous(valeur){
         if(!aPerdu){
             this.argent += valeur
+        }
+    }
+
+    testSortirDePrison(){
+        let de1 = Math.floor(Math.random()*6)+1
+        let de2 = Math.floor(Math.random()*6)+1
+        if(de1 == de2){
+            this.prison = 0
+            return true
+        }else{
+            return false
         }
     }
 }

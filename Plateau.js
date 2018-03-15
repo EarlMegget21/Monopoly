@@ -1,7 +1,8 @@
 class Plateau{
 
 
-     static init(){
+    static init(){
+        Plateau.nbJoueurPerdu = 0
         Plateau.currentPlayer = 0
         Plateau.cases = new Array(40);
         Plateau.tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
@@ -157,6 +158,53 @@ class Plateau{
 
         document.getElementsByTagName('body')[0].appendChild(plateau);
 
+    }
+
+    static lancerScenario(){
+        while(Plateau.nbJoueurPerdu < 3){
+            Plateau.jouerUnTour()
+        }
+        //TODO: Endgame et afficher résultats des joueurs
+    }
+
+    static jouerUnTour(){
+        let joueur = Plateau.getJoueurToPlay()  //Get le joueur actuel
+        if(!Plateau.joueurAPerdu(joueur)){  //Teste si le joueur n'a pas perdu
+            let peutJouer = true
+            if(joueur.prison > 0){  //Joueur en prison
+                if(!joueur.testSortirDePrison()){    //N'arrive pas à sortir de prison
+                    joueur.prison -= 1
+                    peutJouer = false
+                }
+            }
+            if(peutJouer){ //Joueur pas en prison ou vient d'en sortir
+                let lancer = joueur.lancerDe()  //Fais le lancé de dés
+                if ((joueur.position + lancer) > 39) {    //Teste si passe case départ
+                    joueur.argent += 200
+                }
+                Plateau.caseEffect(joueur, lancer)  //Déplacement du joueur sur case corresp et effet de la case
+                Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
+            }
+        }
+    }
+
+    static getJoueurToPlay(){
+        return Plateau.tabjoueur[Plateau.currentPlayer]
+    }
+
+    static joueurAPerdu(joueur){    //Return si le joueur a perdu ou pas
+        return joueur.aPerdu
+    }
+
+    static caseEffect(joueur, lancer){
+        let oldPosition = joueur.position
+        joueur.position = (oldPosition + lancer) % 40   //Set new position
+        Plateau.majPosJoueur(joueur, oldPosition)   //MàJ visuelle du joueur sur plateau
+        Plateau.cases[joueur.position].effect(joueur) //Effet du joueur
+    }
+
+    static majPosJoueur(joueur, oldPosition){
+        //TODO: Rudy -> Mise à jour de la position du joueur sur le plateau (enlever le joueur de la case oldPosition et le mettre à la case joueur.position)
     }
 
 }
