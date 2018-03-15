@@ -1,22 +1,24 @@
-class Joueur{
+class Joueur {
 
-constructor(couleur, argent){
-this.pseudo = couleur;
-this.argent=argent;
-position = 0;
-prison = 0;
-}
+    constructor(couleur, argent) {
+        this.pseudo = couleur;
+        this.argent = argent;
+        position = 0;
+        prison = 0;
+    }
 
-function lancerDe(){
-let de1 = Math.floor(Math.random()*6)+1;
-let de2 = Math.floor(Math.random()*6)+1;
+    function
 
-if(de1 == de2){
-de1+=lancerDe();
-}
+    lancerDe() {
+        let de1 = Math.floor(Math.random() * 6) + 1;
+        let de2 = Math.floor(Math.random() * 6) + 1;
 
-return de1+de2;
-}
+        if (de1 == de2) {
+            de1 += lancerDe();
+        }
+
+        return de1 + de2;
+    }
 
 
 }

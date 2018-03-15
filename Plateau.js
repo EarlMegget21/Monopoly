@@ -42,22 +42,58 @@ function Plateau(){
                 plateau.style.display='flex';
                 col.style.width='60px';
                 col.style.height='60px';
-                if(i%10==0 || j%10==0) { //si c'est une case jouable
+                if(i%10===0 || j%10===0) { //si c'est une case jouable
 
-                    if(i+j>13){
+                    let nom=document.createElement('p');
+                    let prix=document.createElement('p');
+                    let pions=document.createElement('div');
+                    let p1=document.createElement('div');
+                    p1.style.backgroundColor='red';
+                    p1.setAttribute('id', 'p1');
+                    let p2=document.createElement('div');
+                    p2.style.backgroundColor='blue';
+                    p1.setAttribute('id', 'p2');
+                    let p3=document.createElement('div');
+                    p3.style.backgroundColor='yellow';
+                    p1.setAttribute('id', 'p3');
+                    let p4=document.createElement('div');
+                    p4.style.backgroundColor='green';
+                    p1.setAttribute('id', 'p4');
+
+                    if(i+j<=20){ //20 premières cases
                         box=this.cases[i+j];
+                        nom.innerText=box.getNom();
+
+                        if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
+                            prix.innerText=box.getValeur();
+                        }
+
+                        col.appendChild(nom);
+                        col.appendChild(prix);
+                        col.appendChild(pions);
+                        col.style.backgroundColor=box.getCouleur();
+                        box.setNode(col);
+                    }else{ //20 dernières
+                        box=this.cases[40-i];
                         col.innerText=box.getNom();
+
+                        if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
+                            prix.innerText=box.getValeur();
+                        }
+
+                        col.appendChild(nom);
+                        col.appendChild(prix);
+                        col.appendChild(pions);
                         col.style.backgroundColor=box.getCouleur();
                         box.setNode(col);
                     }
-                    //// ajouter pour la moitié des cases restantes et ajouter couleurs joueurs puis gérer affichage des évènements
                 }
 
-                if(i==8 && (j==3 || j==7)){ //cartes spéciales
-                    if(j==3){
+                if(i===8 && (j===3 || j===7)){ //cartes spéciales
+                    if(j===3){
                         col.innerText="Caisse";
                     }
-                    if(j==7){
+                    if(j===7){
                         col.innerText="Chance";
                     }
                     col.style.border="dotted";
@@ -76,6 +112,7 @@ function Plateau(){
 
     }
 
-    this.init()
-    this.initDisplay()
 }
+var p=new Plateau();
+//p.init()
+p.initDisplay()
