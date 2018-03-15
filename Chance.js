@@ -1,6 +1,8 @@
-class Chance extends Case{
+function Chance(nom, node){
 
-    effect(joueur) {
+    this.case = new Case(node, nom, null)
+
+    this.effect = function(joueur) {
         var numCase = Math.floor(Math.random() * Math.floor(41))
         joueur.position = numCase
     }

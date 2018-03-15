@@ -1,13 +1,13 @@
-function Plateau(){
+var Plateau = function(){
 
     this.init = function(){
         this.currentPlayer = 0
         this.cases = new Array(40);
         var x = 0
-        for(i=0; i <= 40; i++){
+        for(i=0; i < 40; i++){
             if(i == 0){
                 this.cases[0] = new GainPerte(null, true, "Départ", null)
-            }else if(i == 4 || i == 39){
+            }else if(i == 4 || i == 38){
                 this.cases[i] = new GainPerte(null, false, "Taxe", null)
             }else{
                 this.cases[i] = new Terrain(null,200,50, "UneCouleur")
@@ -46,9 +46,9 @@ function Plateau(){
 
                     if(i+j>13){
                         box=this.cases[i+j];
-                        col.innerText=box.getNom();
-                        col.style.backgroundColor=box.getCouleur();
-                        box.setNode(col);
+                        col.innerText=box.prototype.getNom();
+                        col.style.backgroundColor=box.prototype.getCouleur();
+                        box.prototype.setNode(col);
                     }
                     //// ajouter pour la moitié des cases restantes et ajouter couleurs joueurs puis gérer affichage des évènements
                 }
@@ -77,5 +77,5 @@ function Plateau(){
     }
 
     this.init()
-    this.initDisplay()
+    //this.initDisplay()
 }

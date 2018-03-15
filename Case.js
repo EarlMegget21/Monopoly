@@ -1,4 +1,4 @@
-function Case(node, nom, couleur){
+var Case = function(node, nom, couleur){
 
     this.node = node
     this.nom = nom

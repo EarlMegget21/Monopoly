@@ -1,6 +1,8 @@
-class Prison extends Case{
+var Prison = function(node, nom, couleur){
 
-    effect(joueur){
+    this.prototype = new Case(node, nom, couleur)
+
+    this.effect = function(joueur){
         joueur.prison = 3
     }
 }

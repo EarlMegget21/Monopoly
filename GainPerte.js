@@ -1,16 +1,14 @@
-class GainPerte extends Case{
+var GainPerte = function(node, nom, couleur, boolean){
 
-    constructor(node, booleen, nom, couleur){
-        this.node = node
-        if(booleen){    //Case Départ
-            this.valeur = 200
-        }else{
-            this.valeur = -150
-        }
-        this.couleur=couleur
+    this.prototype = new Case(node, nom, couleur)
+
+    if(boolean){    //Case Départ
+        this.valeur = 200
+    }else{  //Taxe
+        this.valeur = -150
     }
 
-    effect(joueur){
+    this.effect = function(joueur){
         joueur.argent += this.valeur
     }
 }

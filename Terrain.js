@@ -1,18 +1,13 @@
-class Terrain extends Case{
+var Terrain = function(node, nom, prixAchat, loyer, couleur){
 
-    constructor(node, prixAchat, loyer, couleur){
-        this.node = node
-        this.prixAchat = prixAchat
-        this.loyer = loyer
-        this.couleur = couleur
-        this.propriétaire = null
-        this.nom = nom
-        this.couleur = couleur
-    }
+    this.prototype = new Case(node, nom, couleur)
+    this.loyer = loyer
+    this.prixAchat = prixAchat
+    this.propriétaire = null
 
-    effect(joueur){
+    this.effect = function(joueur){
         if(this.propriétaire == null){
-            acheterTerrain(joueur)
+            this.acheterTerrain(joueur)
         }else{
             Console.log("Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " +  this.propriétaire.couleur)
             joueur.argent -= this.loyer
@@ -20,7 +15,7 @@ class Terrain extends Case{
         }
     }
 
-    acheterTerrain(joueur){
+    this.acheterTerrain = function(joueur){
         Console.log("Le terrain coûte " + this.prixAchat + "€")
         if(joueur.argent >= this.prixAchat) {
             Console.log("Voulez-vous l'acheter ?")
