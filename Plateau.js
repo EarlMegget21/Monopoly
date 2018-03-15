@@ -7,14 +7,18 @@ var Plateau = function(){
         for(i=0; i < 40; i++){
             if(i === 0){
                 this.cases[i] = new GainPerte("Départ","White",200)
-            }else if ( i === 4){//Trésors
+            }else if ( i === 4 || i === 17 || i === 33){//Trésors
                 this.cases[i] = new Trésors("Trésor","none")
             }else if( i === 12 || i === 21 || i === 28){//Taxe
                 this.cases[i] = new GainPerte("Taxe","none",-200)
             }else if ( i === 38 || i === 22 || i === 7){//Chance
                 this.cases[i] = new Chance("Chance")
-            }else if (){//Prison
+            }else if (i === 30){//Prison
                 this.cases[i] = new Prison("Allez en prison","none")
+            }else if (i === 10){//Visit prison
+                this.cases = new Case("Visit en Prison","none")
+            }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
+                this.cases[i] = new Terrain("Gare","Black",200,100)
             }else if (i<10){
                 this.cases[i] = new Terrain("Terrain "+(i+1),"Blue",100+((i+1)*20),((i+1)*20))
             }else if (i<20){
