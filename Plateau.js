@@ -6,13 +6,26 @@ var Plateau = function(){
         var x = 0
         for(i=0; i < 40; i++){
             if(i === 0){
-                this.cases[0] = new GainPerte(null, true, "Départ", null)
-            }else if(i === 4 || i === 38){
-                this.cases[i] = new GainPerte(null, false, "Taxe", null)
+                this.cases[i] = new GainPerte("Départ","White",200)
+            }else if ( i === 4){//Trésors
+                this.cases[i] = new Trésors("Trésor","none")
+            }else if( i === 12 || i === 21 || i === 28){//Taxe
+                this.cases[i] = new GainPerte("Taxe","none",-200)
+            }else if ( i === 38 || i === 22 || i === 7){//Chance
+                this.cases[i] = new Chance("Chance")
+            }else if (){//Prison
+                this.cases[i] = new Prison("Allez en prison","none")
+            }else if (i<10){
+                this.cases[i] = new Terrain("Terrain "+(i+1),"Blue",100+((i+1)*20),((i+1)*20))
+            }else if (i<20){
+                this.cases[i] = new Terrain("Terrain "+(i+1),"Orange",100+((i+1)*20),((i+1)*20))
+            }else if (i<30){
+                this.cases[i] = new Terrain("Terrain "+(i+1),"Yellow",100+((i+1)*20),((i+1)*20))
             }else{
-                this.cases[i] = new Terrain(null,200,50, "UneCouleur")
+                this.cases[i] = new Terrain("Terrain "+(i+1),"Red",100+((i+1)*20),((i+1)*20))
             }
         }
+
         this.tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
         //appeler function Rudy
 
