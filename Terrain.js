@@ -20,6 +20,7 @@ class Terrain extends Case{
     }
 
     effect(joueur){
+        console.log("Vous êtes sur la case " + this.nom)
         if(this.proprietaire == null){
             this.acheterTerrain(joueur)
         }else{
@@ -35,6 +36,7 @@ class Terrain extends Case{
             console.log("Voulez-vous l'acheter ?")
             //TODO: Faire apparaître 2 boutons "Oui" et "Non"
             if (true) {   //TODO: Remplacer "true" par le retour du clic bouton
+                console.log("Vous achetez " + this.nom)
                 this.proprietaire = joueur
                 joueur.argent -= this.valeur
             }
