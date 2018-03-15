@@ -1,10 +1,12 @@
 class Plateau{
 
 
-    static init(){
+     static init(){
         Plateau.currentPlayer = 0
         Plateau.cases = new Array(40);
-        for(let i=0; i < 40; i++){
+        Plateau.tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
+
+        for(var i=0; i < 40; i++){
             if(i === 0){
                 Plateau.cases[i] = new GainPerte("Départ","White",200)
             }else if ( i === 4 || i === 17 || i === 33){//Trésors
@@ -16,22 +18,21 @@ class Plateau{
             }else if (i === 30){//Prison
                 Plateau.cases[i] = new Prison("Allez en prison","none")
             }else if (i === 10){//Visit prison
-                Plateau.cases = new Case("Visit en Prison","none")
+                Plateau.cases[i] = new Case("Visit en Prison","none")
             }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
                 Plateau.cases[i] = new Terrain("Gare","Black",200,100)
             }else if (i<10){
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Blue",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"blue",100+((i+1)*20),((i+1)*20))
             }else if (i<20){
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Orange",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"orange",100+((i+1)*20),((i+1)*20))
             }else if (i<30){
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Yellow",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"yellow",100+((i+1)*20),((i+1)*20))
             }else{
-                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Red",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"red",100+((i+1)*20),((i+1)*20))
             }
         }
 
-        Plateau.tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
-        //appeler function Rudy
+        //TODO: appeler function Rudy
 
     }
 
@@ -79,7 +80,7 @@ class Plateau{
 
                     if(i+j<=20){ //20 premières Plateau.cases
                         let box=Plateau.cases[i+j];
-                        console.log(i+""+j)
+
                         nom.innerText=box.getNom();
 
                         if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
