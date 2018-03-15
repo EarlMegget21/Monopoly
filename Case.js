@@ -5,23 +5,23 @@ class Case{
         this.couleur = couleur
     }
 
-    function getNode(){
+    getNode(){
         return this.node;
     }
 
-   function setNode(node){
+    setNode(node){
         this.node = node;
     }
 
-    function getNom(){
+    getNom(){
         return this.nom;
     }
 
-    function getCouleur(){
+    getCouleur(){
         return this.couleur;
     }
 
-    function effect(joueur){
+    effect(joueur){
         //Do Nothing
     }
 }
