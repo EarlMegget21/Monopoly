@@ -1,5 +1,6 @@
 class Plateau{
 
+
     static init(){
         Plateau.currentPlayer = 0
         Plateau.cases = new Array(40);
