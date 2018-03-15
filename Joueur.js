@@ -13,4 +13,18 @@ var Joueur = function(couleur, argent){
         }
         return de1+de2;
     }
+
+    retirerSous(valeur){
+        this.argent -= valeur
+        if(this.argent <= 0){
+            this.argent = 0
+            this.aPerdu = true;
+        }
+    }
+
+    ajouterSous(valeur){
+        if(!aPerdu){
+            this.argent += valeur
+        }
+    }
 }

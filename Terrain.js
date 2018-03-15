@@ -25,7 +25,7 @@ class Terrain extends Case{
         }else{
             Console.log("Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " +  this.propriétaire.couleur)
             joueur.argent -= this.loyer
-            this.propriétaire.argent += this.loyer
+            this.propriétaire.ajouterSous(this.loyer)
         }
     }
 
@@ -36,7 +36,7 @@ class Terrain extends Case{
             //TODO: Faire apparaître 2 boutons "Oui" et "Non"
             if (true) {   //TODO: Remplacer "true" par le retour du clic bouton
                 this.propriétaire = joueur
-                joueur.argent -= this.valeur
+                joueur.retirerSous(valeur)
             }
         }else{
             Console.log("Vous ne pouvez pas l'acheter")
