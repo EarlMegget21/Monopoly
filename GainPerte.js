@@ -5,11 +5,11 @@ class GainPerte extends Case{
         this.valeur = valeur
     }
 
-    function effect(joueur){
+    effect(joueur){
         joueur.argent += this.valeur
     }
 
-    function getValeur(){
+    getValeur(){
         return this.valeur
     }
 }

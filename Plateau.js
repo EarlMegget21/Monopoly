@@ -1,50 +1,49 @@
-var Plateau = function(){
+class Plateau{
 
-    this.init = function(){
-        this.currentPlayer = 0
-        this.cases = new Array(40);
-        var x = 0
-        for(i=0; i < 40; i++){
+    static init(){
+        Plateau.currentPlayer = 0
+        Plateau.cases = new Array(40);
+        for(let i=0; i < 40; i++){
             if(i === 0){
-                this.cases[i] = new GainPerte("Départ","White",200)
+                Plateau.cases[i] = new GainPerte("Départ","White",200)
             }else if ( i === 4 || i === 17 || i === 33){//Trésors
-                this.cases[i] = new Trésors("Trésor","none")
+                Plateau.cases[i] = new Tresors("Trésor","none")
             }else if( i === 12 || i === 21 || i === 28){//Taxe
-                this.cases[i] = new GainPerte("Taxe","none",-200)
+                Plateau.cases[i] = new GainPerte("Taxe","none",-200)
             }else if ( i === 38 || i === 22 || i === 7){//Chance
-                this.cases[i] = new Chance("Chance")
+                Plateau.cases[i] = new Chance("Chance")
             }else if (i === 30){//Prison
-                this.cases[i] = new Prison("Allez en prison","none")
+                Plateau.cases[i] = new Prison("Allez en prison","none")
             }else if (i === 10){//Visit prison
-                this.cases = new Case("Visit en Prison","none")
+                Plateau.cases = new Case("Visit en Prison","none")
             }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
-                this.cases[i] = new Terrain("Gare","Black",200,100)
+                Plateau.cases[i] = new Terrain("Gare","Black",200,100)
             }else if (i<10){
-                this.cases[i] = new Terrain("Terrain "+(i+1),"Blue",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Blue",100+((i+1)*20),((i+1)*20))
             }else if (i<20){
-                this.cases[i] = new Terrain("Terrain "+(i+1),"Orange",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Orange",100+((i+1)*20),((i+1)*20))
             }else if (i<30){
-                this.cases[i] = new Terrain("Terrain "+(i+1),"Yellow",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Yellow",100+((i+1)*20),((i+1)*20))
             }else{
-                this.cases[i] = new Terrain("Terrain "+(i+1),"Red",100+((i+1)*20),((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrain "+(i+1),"Red",100+((i+1)*20),((i+1)*20))
             }
         }
 
-        this.tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
+        Plateau.tabjoueur = [new Joueur("rouge", 1500),new Joueur("noir", 1500),new Joueur("orange", 1500),new Joueur("bleu", 1500)];
         //appeler function Rudy
 
     }
 
-    this.initDisplay = function() {
+    static initDisplay(){
 
         var plateau=document.createElement('div');
         plateau.style.height='715px';
         plateau.style.width='715px';
         plateau.style.flexDirection='column';
 
-        for(i=0;i<11;i++){ //Lignes
+        for(let i=0;i<11;i++){ //Lignes
 
-            ligne=document.createElement('div');
+            let ligne=document.createElement('div');
             plateau.style.display='flex';
             plateau.style.flexDirection='horizontal';
             ligne.style.backgroundColor='magenta';
@@ -53,9 +52,9 @@ var Plateau = function(){
             ligne.style.justifyContent='space-around';
             ligne.style.height='65px';
 
-            for(j=0;j<11;j++){ //Cases
+            for(let j=0;j<11;j++){ //Plateau.cases
 
-                col=document.createElement('div');
+                let col=document.createElement('div');
                 plateau.style.display='flex';
                 col.style.width='60px';
                 col.style.height='60px';
@@ -77,8 +76,9 @@ var Plateau = function(){
                     p4.style.backgroundColor='green';
                     p1.setAttribute('id', 'p4');
 
-                    if(i+j<=20){ //20 premières cases
-                        box=this.cases[i+j];
+                    if(i+j<=20){ //20 premières Plateau.cases
+                        let box=Plateau.cases[i+j];
+                        console.log(i+""+j)
                         nom.innerText=box.getNom();
 
                         if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
@@ -91,7 +91,7 @@ var Plateau = function(){
                         col.style.backgroundColor=box.getCouleur();
                         box.setNode(col);
                     }else{ //20 dernières
-                        box=this.cases[40-i];
+                        let box=Plateau.cases[40-i];
                         col.innerText=box.getNom();
 
                         if(box.hasOwnProperty('valeur')){ //tester les autres(montant, etc)
@@ -130,6 +130,6 @@ var Plateau = function(){
     }
 
 }
-var p=new Plateau();
-//p.init()
-p.initDisplay()
+
+Plateau.init()
+Plateau.initDisplay()
