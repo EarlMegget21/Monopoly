@@ -9,6 +9,7 @@ class Joueur{
     }
 
     lancerDe(){
+        //TODO afficher un bouton "lancer"
         let de = Math.floor(Math.random()*10)+2;
         return de
     }

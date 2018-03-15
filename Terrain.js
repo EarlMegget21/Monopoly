@@ -23,7 +23,7 @@ class Terrain extends Case{
         if(this.proprietaire == null){
             this.acheterTerrain(joueur)
         }else{
-            console.log("Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " +  this.proprietaire.couleur)
+            console.log("Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " +  this.proprietaire.couleur) //TODO afficher à l'écran avec un délai
             joueur.retirerSous(this.loyer)
             this.proprietaire.ajouterSous(this.loyer)
         }
@@ -32,14 +32,14 @@ class Terrain extends Case{
     acheterTerrain(joueur){
         console.log("Le terrain coûte " + this.valeur + "€")
         if(joueur.argent >= this.valeur) {
-            console.log("Voulez-vous l'acheter ?")
+            console.log("Voulez-vous l'acheter ?") //TODO afficher ça au centre de l'écran
             //TODO: Faire apparaître 2 boutons "Oui" et "Non"
             if (true) {   //TODO: Remplacer "true" par le retour du clic bouton
                 this.proprietaire = joueur
                 joueur.argent -= this.valeur
             }
         }else{
-            console.log("Vous ne pouvez pas l'acheter")
+            console.log("Vous ne pouvez pas l'acheter") //TODO afficher ça au centre de l'écran
         }
     }
 }

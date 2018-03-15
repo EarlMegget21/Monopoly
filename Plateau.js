@@ -53,11 +53,15 @@ class Plateau{
         plateau.style.display='flex';
         plateau.style.flexDirection='column';
         plateau.style.height="715px";
+        plateau.style.backgroundColor='#b1ccba';
+        plateau.style.backgroundImage="url(logo.png)";
+        plateau.style.backgroundRepeat="no-repeat";
+        plateau.style.backgroundSize="40%";
+        plateau.style.backgroundPosition="center";
 
         for(let i=0;i<11;i++){ //Lignes
 
             let ligne=document.createElement('div');
-            ligne.style.backgroundColor='#b1ccba';
             ligne.style.display='flex';
             ligne.style.alignItems='stretch';
             ligne.style.flexGrow='1';
@@ -69,28 +73,40 @@ class Plateau{
                 col.style.flexGrow='1';
                 col.style.border="solid";
                 col.style.borderColor="transparent";
+                col.style.display='flex';
+                col.style.alignItems='center';
 
                 if(i%10===0 || j%10===0) { //si c'est une case jouable
 
                     let nom=document.createElement('div');
-                    let prix=document.createElement('div');
+                    nom.style.flexGrow='1';
+                        let prix=document.createElement('div');
+                    prix.style.flexGrow='1';
+
                     let pions=document.createElement('div');
+                    pions.style.display='flex';
+                    pions.style.flexDirection='column';
+                    pions.style.height='100%';
 
                     let p1=document.createElement('div');
                     p1.style.backgroundColor='red';
-                    //p1.setAttribute('id', 'p1');
+                    p1.style.flexGrow='1';
+                    p1.style.width='9px';
 
                     let p2=document.createElement('div');
                     p2.style.backgroundColor='blue';
-                    //p1.setAttribute('id', 'p2');
+                    p2.style.flexGrow='1';
+                    p2.style.width='9px';
 
                     let p3=document.createElement('div');
                     p3.style.backgroundColor='yellow';
-                    //p1.setAttribute('id', 'p3');
+                    p3.style.flexGrow='1';
+                    p3.style.width='9px';
 
                     let p4=document.createElement('div');
                     p4.style.backgroundColor='green';
-                    //p1.setAttribute('id', 'p4');
+                    p4.style.flexGrow='1';
+                    p4.style.width='9px';
 
                     pions.appendChild(p1);
                     pions.appendChild(p2);
@@ -98,55 +114,48 @@ class Plateau{
                     pions.appendChild(p4);
 
 
+                    col.appendChild(nom);
+                    col.appendChild(prix);
+                    col.appendChild(pions);
+
+                    let box;
+
                     if(i===0 || j===10){//20 premières cases
-                        let box=Plateau.cases[i+j];
-
-                        if(box instanceof Terrain == false){
-                            col.style.borderColor="black";
-                        }
-
-                        nom.innerText=box.getNom();
-
-                        if(box.hasOwnProperty('valeur')){
-                            prix.innerText=box.getValeur();
-                        }
-
-                        col.appendChild(nom);
-                        col.appendChild(prix);
-                        col.appendChild(pions);
-                        col.style.backgroundColor=box.getCouleur();
-                        box.setNode(col);
+                        box=Plateau.cases[i+j];
                     }else{ //20 dernières
-                        let box=Plateau.cases[40-(j+i)];
-
-                        if(box instanceof Terrain == false){
-                            col.style.borderColor="black";
-                        }
-
-                        col.innerText=box.getNom();
-
-                        if(box.hasOwnProperty('valeur')){
-                            prix.innerText=box.getValeur();
-                        }
-
-                        col.appendChild(nom);
-                        col.appendChild(prix);
-                        col.appendChild(pions);
-                        col.style.backgroundColor=box.getCouleur();
-                        box.setNode(col);
+                        box=Plateau.cases[40-(j+i)];
                     }
+
+                    nom.style.backgroundColor=box.getCouleur();
+                    box.setNode(col);
+
+                    nom.innerHTML="<div>"+box.getNom()+"</div>"; //TODO regler pb hauteur et images
+
+                    if(box instanceof Terrain === false){
+                        col.style.borderColor="black";
+                    }
+
+                    if(box.hasOwnProperty('valeur')){
+                        prix.innerText=box.getValeur();
+                    }
+
                 }
 
-                if(i===8 && (j===3 || j===7)){ //cartes spéciales
+                if(i===8 && (j===3 || j===7)){ //case des cartes
                     if(j===3){
-                        col.innerText="Caisse";
+                        col.style.backgroundImage="url(caisse.gif)"
+                        col.style.backgroundRepeat="no-repeat";
+                        col.style.backgroundSize="contain";
+                        col.style.backgroundPosition="center";
                     }
                     if(j===7){
-                        col.innerText="Chance";
+                        col.style.backgroundImage="url(chance.png)"
+                        col.style.backgroundRepeat="no-repeat";
+                        col.style.backgroundSize="contain";
+                        col.style.backgroundPosition="center";
                     }
                     col.style.border="dotted";
                 }
-
 
                 ligne.appendChild(col);
 
@@ -199,11 +208,11 @@ class Plateau{
     static caseEffect(joueur, lancer){
         let oldPosition = joueur.position
         joueur.position = (oldPosition + lancer) % 40   //Set new position
-        Plateau.majPosJoueur(joueur, oldPosition)   //MàJ visuelle du joueur sur plateau
+        Plateau.majPosJoueur(joueur, oldPosition, Plateau.currentPlayer)   //MàJ visuelle du joueur sur plateau
         Plateau.cases[joueur.position].effect(joueur) //Effet du joueur
     }
 
-    static majPosJoueur(joueur, oldPosition){
+    static majPosJoueur(joueur, oldPosition, indiceJoueur){
         //TODO: Rudy -> Mise à jour de la position du joueur sur le plateau (enlever le joueur de la case oldPosition et le mettre à la case joueur.position)
     }
 
