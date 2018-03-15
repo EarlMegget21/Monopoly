@@ -18,12 +18,14 @@ class Joueur{
         this.argent -= valeur
         if(this.argent <= 0){
             this.argent = 0
-            this.aPerdu = true;
+            this.aPerdu = true
+            Plateau.nbJoueurPerdu += 1
+            console.log("Vous n'avez plus d'argent, vous avez perdu")
         }
     }
 
     ajouterSous(valeur){
-        if(!aPerdu){
+        if(!this.aPerdu){
             this.argent += valeur
         }
     }
@@ -31,6 +33,7 @@ class Joueur{
     testSortirDePrison(){
         let de1 = Math.floor(Math.random()*6)+1
         let de2 = Math.floor(Math.random()*6)+1
+        console.log("Votre lancé: " + de1 + " et " + de2)
         if(de1 == de2){
             this.prison = 0
             return true

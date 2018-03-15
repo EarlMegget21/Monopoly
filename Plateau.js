@@ -13,7 +13,7 @@ class Plateau{
             }else if ( i === 3 || i === 17 || i === 32){ //Caisse de Communauté
                 Plateau.cases[i] = new Tresors("Caisse", "none")
             }else if( i === 12 || i === 28){ //Taxe
-                Plateau.cases[i] = new GainPerte("Taxe", "none",-200)
+                Plateau.cases[i] = new GainPerte("Taxe", "none",-150)
             }else if ( i === 38 || i === 22 || i === 7){ //Chance
                 Plateau.cases[i] = new Chance("Chance")
             }else if (i === 30){//Prison
@@ -170,30 +170,51 @@ class Plateau{
     }
 
     static lancerScenario(){
+        console.log("Début de la partie")
         while(Plateau.nbJoueurPerdu < 3){
             Plateau.jouerUnTour()
         }
+        console.log("Fin de la partie")
         //TODO: Endgame et afficher résultats des joueurs
     }
 
     static jouerUnTour(){
         let joueur = Plateau.getJoueurToPlay()  //Get le joueur actuel
         if(!Plateau.joueurAPerdu(joueur)){  //Teste si le joueur n'a pas perdu
+            console.log("Tour du joueur " + joueur.couleur)
             let peutJouer = true
             if(joueur.prison > 0){  //Joueur en prison
                 if(!joueur.testSortirDePrison()){    //N'arrive pas à sortir de prison
                     joueur.prison -= 1
+                    if(joueur.prison == 0){ //On place le joueur sur la case visite
+                        joueur.position = 10
+                        Plateau.majPosJoueur(joueur, 30)
+                        console.log("Vous serez libéré de prison au tour suivant")
+                    }else{
+                        console.log("Vous restez en prison")
+                    }
                     peutJouer = false
+                    Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
+                    console.log("Fin du tour")
+                }else{  //On place le joueur sur la case visite
+                    joueur.position = 10
+                    Plateau.majPosJoueur(joueur, 30)
+                    console.log("Vous êtes libéré de prison")
                 }
             }
             if(peutJouer){ //Joueur pas en prison ou vient d'en sortir
                 let lancer = joueur.lancerDe()  //Fais le lancé de dés
+                console.log("Votre lancé de dé: " + lancer)
                 if ((joueur.position + lancer) > 39) {    //Teste si passe case départ
+                    console.log("Vous passez par la case Départ, vous touchez 200€")
                     joueur.argent += 200
                 }
                 Plateau.caseEffect(joueur, lancer)  //Déplacement du joueur sur case corresp et effet de la case
                 Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
+                console.log("Fin du tour")
             }
+        }else{
+            Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
         }
     }
 

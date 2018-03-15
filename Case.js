@@ -22,6 +22,6 @@ class Case{
     }
 
     effect(joueur){
-        //Do Nothing
+        console.log("Vous être sur la case: " + this.nom)
     }
 }
