@@ -1,8 +1,7 @@
 class Prison extends Case{
 
     effect(joueur){
-        Plateau.message = "Vous allez en prison"
-        console.log('afficher');//Plateau.afficherMessage()
+        Plateau.message += "\nHalte! Vous allez en prison.\nNe passez pas par la case départ, ne touchez pas 200 € !";
         joueur.prison = 3
     }
 

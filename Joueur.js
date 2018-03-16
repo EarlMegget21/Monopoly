@@ -9,33 +9,31 @@ class Joueur{
     }
 
     lancerDe(){
-        let de = Math.floor(Math.random()*10)+2;
-        return de
+        return Math.floor(Math.random()*11)+1;
     }
 
     retirerSous(valeur){
-        this.argent -= valeur
+        this.argent -= valeur;
         if(this.argent <= 0){
-            this.argent = 0
-            this.aPerdu = true
-            this.position = null
-            Plateau.nbJoueurPerdu += 1
-            for(let i=0;i<40;i++){
-                let proprioCase = Plateau.cases[i].proprietaire
+            this.argent = 0;
+            this.aPerdu = true;
+            this.position = null;
+            Plateau.nbJoueurPerdu += 1;
+            /*for(let i=0;i<40;i++){ //pour retirer les propriétés des joueurs qui ont perdu (modifier les border en transparent)
+                let proprioCase = Plateau.cases[i].proprietaire;
                 if(proprioCase != null){
                     if(proprioCase.couleur = this.couleur){
                         Plateau.cases[i].proprietaire = null
                     }
                 }
-            }
-            Plateau.message = "Vous n'avez plus d'argent, vous avez perdu"
-            console.log('afficher');//Plateau.afficherMessage()
+            }*/
+            Plateau.message = "Vous n'avez plus d'argent, vous avez perdu.";
         }
     }
 
     ajouterSous(valeur){
         if(!this.aPerdu){
-            this.argent += valeur
+            this.argent += valeur;
         }
     }
 
@@ -62,5 +60,21 @@ class Joueur{
 
     getArgent(){
         return this.argent;
+    }
+
+    getPrison(){
+        return this.prison;
+    }
+
+    decPrison(){
+        this.prison--;
+    }
+
+    setPrison(pris){
+        this.prison=pris;
+    }
+
+    setPosition(pos){
+        this.position=pos;
     }
 }

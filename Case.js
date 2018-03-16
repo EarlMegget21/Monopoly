@@ -16,7 +16,7 @@ class Case{
     }
 
     effect(joueur){
-
+        Plateau.message +="\nVous pouvez vous reposer à ce tour.";
     }
 
     getImage(){

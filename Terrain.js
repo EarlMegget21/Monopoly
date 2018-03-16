@@ -19,38 +19,33 @@ class Terrain extends Case{
         return this.proprietaire
     }
 
-    effect(joueur){
+    effect(joueur){ //affichage à l'arrivée sur un terrain
         if(this.proprietaire == null){
-            //this.acheterTerrain(joueur)
-            Plateau.message+="Voulez-vous acheter le terrain ?";
+            if (joueur.getArgent() >= this.valeur) {
+                Plateau.message += "\nVoulez-vous acheter le terrain ?";
+            } else {
+                Plateau.message = "\nVous n'avez pas assez d'argent pour acheter ce terrain.";
+            }
         }else{
             if(this.proprietaire === joueur) {
-                Plateau.message += "Vous êtes chez vous"
+                Plateau.message += "\nVous êtes chez vous";
 
-            }else if (this.proprietaire.prison != 0) {
-                Plateau.message += "Le joueur " + this.proprietaire.couleur + " est en prison, vous ne devez rien";
+            }else if (this.proprietaire.getPrison() !== 0) {
+                Plateau.message += "\nLe joueur " + this.proprietaire.getCouleur() + " est en prison, vous ne devez rien.";
 
             } else {
-                Plateau.message += "Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " + this.proprietaire.couleur;
-
-                joueur.retirerSous(this.loyer)
-                this.proprietaire.ajouterSous(this.loyer)
+                Plateau.message += "\nVous avez payé votre loyer de " + this.loyer + "€ au joueur " + this.proprietaire.getCouleur()+".";
+                joueur.retirerSous(this.loyer);
+                this.proprietaire.ajouterSous(this.loyer);
             }
         }
     }
 
-    acheterTerrain(){
+    acheterTerrain(){ //listener du bouton "acheter"
         var joueur=Plateau.getJoueurToPlay();
-        if(joueur.argent >= this.valeur) {
-            Plateau.message="Le terrain coûte " + this.valeur + "€. Voulez-vous l'acheter ?"
-            //console.log('afficher');//Plateau.afficherMessage()
-
-                this.proprietaire = joueur
-                joueur.argent -= this.valeur
-
-        }else{
-            Plateau.message = "Le terrain coûte " + this.valeur + "€. Vous ne pouvez pas l'acheter"
-        }
-        Plateau.initDisplay();
+        Plateau.message="L'achat a bien été clôturé.\nVous compte a été débité de "+this.valeur+" €";
+        this.proprietaire = joueur;
+        joueur.argent -= this.valeur;
+        Plateau.initDisplay(); //met à jour l'affichage pour confirmer l'achat
     }
 }
