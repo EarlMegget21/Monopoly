@@ -76,6 +76,7 @@ class Plateau{
                 col.style.borderColor="transparent";
                 col.style.display='flex';
 
+
                 if(i%10===0 || j%10===0) { //si c'est une case jouable
                     let nom=document.createElement('div');
                     nom.style.display="flex";

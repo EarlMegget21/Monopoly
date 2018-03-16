@@ -19,7 +19,16 @@ class Joueur{
         if(this.argent <= 0){
             this.argent = 0
             this.aPerdu = true
+            this.position = null
             Plateau.nbJoueurPerdu += 1
+            for(let i=0;i<40;i++){
+                let proprioCase = Plateau.cases[i].proprietaire
+                if(proprioCase != null){
+                    if(proprioCase.couleur = this.couleur){
+                        Plateau.cases[i].proprietaire = null
+                    }
+                }
+            }
             console.log("Vous n'avez plus d'argent, vous avez perdu")
         }
     }
