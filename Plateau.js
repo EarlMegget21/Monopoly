@@ -204,7 +204,7 @@ class Plateau{
                     joueur.prison -= 1
                     if(joueur.prison == 0){ //On place le joueur sur la case visite
                         joueur.position = 10
-                        Plateau.majPosJoueur(joueur, 30)
+                        Plateau.initDisplay()
                         console.log("Vous serez libéré de prison au tour suivant")
                     }else{
                         console.log("Vous restez en prison")
@@ -214,7 +214,7 @@ class Plateau{
                     console.log("Fin du tour")
                 }else{  //On place le joueur sur la case visite
                     joueur.position = 10
-                    Plateau.majPosJoueur(joueur, 30)
+                    Plateau.initDisplay()
                     console.log("Vous êtes libéré de prison")
                 }
             }
@@ -245,15 +245,10 @@ class Plateau{
     static caseEffect(joueur, lancer){
         let oldPosition = joueur.position
         joueur.position = (oldPosition + lancer) % 40   //Set new position
-        Plateau.majPosJoueur(joueur, oldPosition, Plateau.currentPlayer)   //MàJ visuelle du joueur sur plateau
+        Plateau.initDisplay()   //MàJ visuelle du joueur sur plateau
         Plateau.cases[joueur.position].effect(joueur) //Effet du joueur
-    }
-
-    static majPosJoueur(joueur, oldPosition, indiceJoueur){
         Plateau.initDisplay()
-        //TODO: Rudy -> Mise à jour de la position du joueur sur le plateau (enlever le joueur de la case oldPosition et le mettre à la case joueur.position)
     }
-
 }
 
 Plateau.init();
