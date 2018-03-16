@@ -1,4 +1,4 @@
-var inc=0;
+var inc=-1;
 class Chance extends Case{
 
     effect(joueur) {
@@ -13,7 +13,7 @@ class Chance extends Case{
     }
 
     getImage(){
-        inc++;
+        inc=(inc+1)%3;
         return "chance"+inc+".png";
     }
 }

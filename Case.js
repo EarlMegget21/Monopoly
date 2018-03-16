@@ -1,17 +1,10 @@
 class Case{
 
-    constructor(nom, couleur, img) {
+    constructor(nom, couleur, img, valeur) {
         this.nom = nom;
         this.couleur = couleur;
         this.img=img;
-    }
-
-    getNode(){
-        return this.node;
-    }
-
-    setNode(node){
-        this.node = node;
+        this.valeur=valeur;
     }
 
     getNom(){
@@ -28,5 +21,9 @@ class Case{
 
     getImage(){
         return this.img;
+    }
+
+    getValeur(){
+        return this.valeur;
     }
 }

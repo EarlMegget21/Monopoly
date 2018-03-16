@@ -58,4 +58,8 @@ class Joueur{
     getCouleur(){
         return this.couleur;
     }
+
+    getArgent(){
+        return this.argent;
+    }
 }

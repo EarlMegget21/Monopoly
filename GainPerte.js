@@ -1,10 +1,5 @@
 class GainPerte extends Case{
 
-    constructor(nom, couleur, img, valeur) {
-        super(nom, couleur, img)
-        this.valeur = valeur
-    }
-
     effect(joueur){
         console.log("Vous êtes sur la case " + this.nom)
         if(this.valeur < 0){
