@@ -9,7 +9,6 @@ class Joueur{
     }
 
     lancerDe(){
-        //TODO afficher un bouton "lancer"
         let de = Math.floor(Math.random()*10)+2;
         return de
     }
@@ -29,7 +28,8 @@ class Joueur{
                     }
                 }
             }
-            console.log("Vous n'avez plus d'argent, vous avez perdu")
+            Plateau.message = "Vous n'avez plus d'argent, vous avez perdu"
+            console.log('afficher');//Plateau.afficherMessage()
         }
     }
 
@@ -42,7 +42,8 @@ class Joueur{
     testSortirDePrison(){
         let de1 = Math.floor(Math.random()*6)+1
         let de2 = Math.floor(Math.random()*6)+1
-        console.log("Votre lancé: " + de1 + " et " + de2)
+        Plateau.message = "Votre lancé: " + de1 + " et " + de2
+        console.log('afficher');//Plateau.afficherMessage()
         if(de1 == de2){
             this.prison = 0
             return true

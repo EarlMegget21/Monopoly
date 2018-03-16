@@ -16,7 +16,7 @@ class Case{
     }
 
     effect(joueur){
-        console.log("Vous être sur la case: " + this.nom)
+
     }
 
     getImage(){

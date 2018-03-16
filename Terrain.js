@@ -20,35 +20,37 @@ class Terrain extends Case{
     }
 
     effect(joueur){
-        console.log("Vous êtes sur la case " + this.nom)
         if(this.proprietaire == null){
-            this.acheterTerrain(joueur)
+            //this.acheterTerrain(joueur)
+            Plateau.message+="Voulez-vous acheter le terrain ?";
         }else{
             if(this.proprietaire === joueur) {
-                console.log("Vous êtes chez vous")
+                Plateau.message += "Vous êtes chez vous"
+
             }else if (this.proprietaire.prison != 0) {
-                console.log("Le joueur " + this.proprietaire.couleur + " est en prison, vous ne devez rien")
+                Plateau.message += "Le joueur " + this.proprietaire.couleur + " est en prison, vous ne devez rien";
+
             } else {
-                console.log("Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " + this.proprietaire.couleur) //TODO afficher à l'écran avec un délai
+                Plateau.message += "Le joueur " + joueur.couleur + " doit " + this.loyer + "€ au joueur " + this.proprietaire.couleur;
+
                 joueur.retirerSous(this.loyer)
                 this.proprietaire.ajouterSous(this.loyer)
             }
         }
     }
 
-
-    acheterTerrain(joueur){
-        console.log("Le terrain coûte " + this.valeur + "€")
+    acheterTerrain(){
+        var joueur=Plateau.getJoueurToPlay();
         if(joueur.argent >= this.valeur) {
-            console.log("Voulez-vous l'acheter ?") //TODO afficher ça au centre de l'écran
-            //TODO: Faire apparaître 2 boutons "Oui" et "Non"
-            if (true) {   //TODO: Remplacer "true" par le retour du clic bouton
-                console.log("Vous achetez " + this.nom)
+            Plateau.message="Le terrain coûte " + this.valeur + "€. Voulez-vous l'acheter ?"
+            //console.log('afficher');//Plateau.afficherMessage()
+
                 this.proprietaire = joueur
                 joueur.argent -= this.valeur
-            }
+
         }else{
-            console.log("Vous ne pouvez pas l'acheter") //TODO afficher ça au centre de l'écran
+            Plateau.message = "Le terrain coûte " + this.valeur + "€. Vous ne pouvez pas l'acheter"
         }
+        Plateau.initDisplay();
     }
 }

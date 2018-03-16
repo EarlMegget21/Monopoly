@@ -1,12 +1,13 @@
 class GainPerte extends Case{
 
     effect(joueur){
-        console.log("Vous êtes sur la case " + this.nom)
         if(this.valeur < 0){
-            console.log("Vous perdez " + (-this.valeur) + "€")
+            Plateau.message = "Vous perdez " + (-this.valeur) + "€"
+            console.log('afficher');//Plateau.afficherMessage()
             joueur.retirerSous(this.valeur * -1)
         }else{
-            console.log("Vous gagnez " + this.valeur + "€")
+            Plateau.message = "Vous gagnez " + this.valeur + "€"
+            console.log('afficher');//Plateau.afficherMessage()
             joueur.ajouterSous(this.valeur)
         }
     }

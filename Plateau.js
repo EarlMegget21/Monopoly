@@ -4,9 +4,11 @@ class Plateau{
     static init(){
         Plateau.nbJoueurPerdu = 0
         Plateau.currentPlayer = 0
-        Plateau.cases = new Array(40);
-        Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)];
-        Plateau.message = "Jouez !";
+        Plateau.cases = new Array(40)
+        Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)]
+        Plateau.message = ""
+        Plateau.continue = false
+        Plateau.achat = false
 
         for(var i=0; i < 40; i++){
             if(i === 0){
@@ -43,9 +45,13 @@ class Plateau{
                 Plateau.cases[i] = new Terrain("Terrains 8", "#8284ff", "#", 100+((i+1)*20), ((i+1)*20))
             }
         }
+        Plateau.lancerScenario();
+    }
 
+    static lancerScenario(){
+        Plateau.message = "Début de la partie"
         Plateau.initDisplay();
-
+        Plateau.currentPlayer=-1;
     }
 
     /**
@@ -106,23 +112,28 @@ class Plateau{
 
         var mess=document.createElement('div');
         mess.innerText=Plateau.message;
-        var b1=document.createElement('button');;
-        var b2=document.createElement('div');
+        var b1=document.createElement('div');
+        var b2=document.createElement('button');
 
         //créer les boutons nécessaires pour l'intéraction
         var bool=true;
-        var joueur=Plateau.tabjoueur[Plateau.currentPlayer];
+        var joueur=Plateau.getJoueurToPlay();
         var actuelle=Plateau.cases[joueur.getPosition()];
         //teste si le joueur peut acheter le terrain ou non
-        if(actuelle instanceof Terrain && actuelle.getProprietaire() != null && joueur.getArgent() < actuelle.getValeur()){
-                b1.innerText="Acheter";
-                b2=document.createElement('button');
-                b2.innerText="Passer";
-                bool=false;
+        console.log(joueur)
+        if(actuelle instanceof Terrain && actuelle.getProprietaire() == null && joueur.getArgent() >= actuelle.getValeur()){
+            b1=document.createElement('button');
+            b1.innerText="Acheter"
+            b1.addEventListener("click", function (e) {
+                actuelle.acheterTerrain();
+            })
+            b2.innerText="Passer";
+            bool=false;
         }
         if(bool){
-            b1.innerText="OK";
+            b2.innerText="OK";
         }
+        b2.addEventListener("click", Plateau.jouerUnTour)
         log.appendChild(mess);
         log.appendChild(b1);
         log.appendChild(b2);
@@ -253,70 +264,74 @@ class Plateau{
 
     }
 
-    static lancerScenario(){
-        console.log("Début de la partie")
-        while(Plateau.nbJoueurPerdu < 3){
-            Plateau.jouerUnTour()
-        }
-        console.log("Fin de la partie")
-        //TODO: Endgame et afficher résultats des joueurs
-    }
-
     static jouerUnTour(){
+        Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
         let joueur = Plateau.getJoueurToPlay()  //Get le joueur actuel
         if(!Plateau.joueurAPerdu(joueur)){  //Teste si le joueur n'a pas perdu
-            console.log("Tour du joueur " + joueur.couleur)
             let peutJouer = true
-            if(joueur.prison > 0){  //Joueur en prison
-                if(!joueur.testSortirDePrison()){    //N'arrive pas à sortir de prison
+            if(joueur.prison > 0) {  //Joueur en prison
+                console.log(joueur.getCouleur()+" "+joueur.prison)
+                if (!joueur.testSortirDePrison()) {    //N'arrive pas à sortir de prison
+                    console.log("b")
                     joueur.prison -= 1
-                    if(joueur.prison == 0){ //On place le joueur sur la case visite
+                    if (joueur.prison == 0) { //On place le joueur sur la case visite
                         joueur.position = 10
-                        Plateau.initDisplay()
-                        console.log("Vous serez libéré de prison au tour suivant")
-                    }else{
-                        console.log("Vous restez en prison")
+                        Plateau.message = "Vous serez libéré de prison au tour suivant"
+                    } else {
+                        console.log("d")
+                        Plateau.message = "Vous restez en prison"
                     }
+                    console.log("e")
+                    console.log('afficher');//Plateau.afficherMessage()
+                    console.log("f")
                     peutJouer = false
                     Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
-                    console.log("Fin du tour")
-                }else{  //On place le joueur sur la case visite
+                } else {  //On place le joueur sur la case visite
                     joueur.position = 10
-                    Plateau.initDisplay()
-                    console.log("Vous êtes libéré de prison")
+                    Plateau.message = "Vous êtes libéré de prison"
+                    console.log('afficher');//Plateau.afficherMessage()
                 }
             }
+
             if(peutJouer){ //Joueur pas en prison ou vient d'en sortir
+                console.log("bon")
                 let lancer = joueur.lancerDe()  //Fais le lancé de dés
-                console.log("Votre lancé de dé: " + lancer)
+                Plateau.message = "Votre lancé de dé: " + lancer
+                console.log('afficher1');//Plateau.afficherMessage()
                 if ((joueur.position + lancer) > 39) {    //Teste si passe case départ
-                    console.log("Vous passez par la case Départ, vous touchez 200€")
+                    Plateau.message = "Vous passez par la case Départ, vous touchez 200€"
+                    console.log('afficher');//Plateau.afficherMessage()
                     joueur.argent += 200
                 }
                 Plateau.caseEffect(joueur, lancer)  //Déplacement du joueur sur case corresp et effet de la case
-                Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
-                console.log("Fin du tour")
             }
-        }else{
-            Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4
         }
-    }
+}
 
-    static getJoueurToPlay(){
-        return Plateau.tabjoueur[Plateau.currentPlayer]
-    }
+static getJoueurToPlay(){
+    return Plateau.tabjoueur[Plateau.currentPlayer]
+}
 
-    static joueurAPerdu(joueur){    //Return si le joueur a perdu ou pas
-        return joueur.aPerdu
-    }
+static joueurAPerdu(joueur){    //Return si le joueur a perdu ou pas
+    return joueur.aPerdu
+}
 
-    static caseEffect(joueur, lancer){
-        let oldPosition = joueur.position
-        joueur.position = (oldPosition + lancer) % 40   //Set new position
-        Plateau.initDisplay()   //MàJ visuelle du joueur sur plateau
-        Plateau.cases[joueur.position].effect(joueur) //Effet du joueur
-        Plateau.initDisplay()
+static caseEffect(joueur, lancer){
+
+    let oldPosition = joueur.position
+    joueur.position = (oldPosition + lancer) % 40   //Set new position
+    //Plateau.initDisplay()   //MàJ visuelle du joueur sur plateau
+    Plateau.cases[joueur.position].effect(joueur) //Effet du joueur
+
+    Plateau.initDisplay()
+}
+
+static afficherMessage(){
+    Plateau.continue = false
+    Plateau.initDisplay()
+    while(!Plateau.continue) {
     }
+}
 }
 
 Plateau.init();
