@@ -1,3 +1,4 @@
+var inc=0;
 class Chance extends Case{
 
     effect(joueur) {
@@ -9,5 +10,10 @@ class Chance extends Case{
         }
         console.log("Déplacement de " + deplacement + " cases")
         Plateau.caseEffect(joueur, deplacement)
+    }
+
+    getImage(){
+        inc++;
+        return "chance"+inc+".png";
     }
 }

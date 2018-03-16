@@ -1,7 +1,7 @@
 class Terrain extends Case{
 
-    constructor(nom, couleur, prixAchat, loyer) {
-        super(nom, couleur)
+    constructor(nom, couleur, img, prixAchat, loyer) {
+        super(nom, couleur, img)
         this.valeur = prixAchat
         this.loyer = loyer
         this.proprietaire = null

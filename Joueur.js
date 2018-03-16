@@ -41,4 +41,12 @@ class Joueur{
             return false
         }
     }
+
+    getPosition(){
+        return this.position;
+    }
+
+    getCouleur(){
+        return this.couleur;
+    }
 }

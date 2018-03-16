@@ -1,7 +1,7 @@
 class GainPerte extends Case{
 
-    constructor(nom, couleur, valeur) {
-        super(nom, couleur)
+    constructor(nom, couleur, img, valeur) {
+        super(nom, couleur, img)
         this.valeur = valeur
     }
 
@@ -18,5 +18,9 @@ class GainPerte extends Case{
 
     getValeur(){
         return this.valeur
+    }
+
+    getImage(){
+        return this.img;
     }
 }

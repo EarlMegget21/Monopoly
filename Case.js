@@ -1,8 +1,9 @@
 class Case{
 
-    constructor(nom, couleur) {
-        this.nom = nom
-        this.couleur = couleur
+    constructor(nom, couleur, img) {
+        this.nom = nom;
+        this.couleur = couleur;
+        this.img=img;
     }
 
     getNode(){
@@ -23,5 +24,9 @@ class Case{
 
     effect(joueur){
         console.log("Vous être sur la case: " + this.nom)
+    }
+
+    getImage(){
+        return this.img;
     }
 }

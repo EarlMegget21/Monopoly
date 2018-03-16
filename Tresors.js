@@ -11,4 +11,8 @@ class Tresors extends Case{
             joueur.ajouterSous(montant)
         }
     }
+
+    getImage(){
+        return "caisse.gif";
+    }
 }

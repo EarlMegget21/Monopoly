@@ -5,4 +5,8 @@ class Prison extends Case{
         //TODO déplacer le joueur à la prison
         joueur.prison = 3
     }
+
+    getImage(){
+        return "prison.gif"
+    }
 }
