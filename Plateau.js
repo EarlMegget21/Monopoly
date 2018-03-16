@@ -48,6 +48,7 @@ class Plateau{
     }
 
     static initDisplay(){
+        document.getElementsByTagName("body")[0].innerHTML = "" //Vide plateau
 
         var plateau=document.createElement('div');
         plateau.style.display='flex';
@@ -76,7 +77,6 @@ class Plateau{
                 col.style.display='flex';
 
                 if(i%10===0 || j%10===0) { //si c'est une case jouable
-
                     let nom=document.createElement('div');
                     nom.style.display="flex";
                     nom.style.alignItems="center";
@@ -141,10 +141,14 @@ class Plateau{
 
                     nom.style.backgroundImage="url("+box.getImage()+")";
 
-                    nom.innerHTML=box.getNom(); //TODO images
+                    nom.innerHTML=box.getNom();
 
                     if(box instanceof Terrain === false){
                         col.style.borderColor="black";
+                    }else{
+                        if(box.getProprietaire() != null){
+                            col.style.borderColor = box.getProprietaire().getCouleur()
+                        }
                     }
 
                     if(box.hasOwnProperty('valeur')){
@@ -246,6 +250,7 @@ class Plateau{
     }
 
     static majPosJoueur(joueur, oldPosition, indiceJoueur){
+        Plateau.initDisplay()
         //TODO: Rudy -> Mise à jour de la position du joueur sur le plateau (enlever le joueur de la case oldPosition et le mettre à la case joueur.position)
     }
 
