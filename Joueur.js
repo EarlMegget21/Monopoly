@@ -6,6 +6,7 @@ class Joueur{
         this.position = 0;
         this.prison = 0;
         this.aPerdu = false
+        this.nbGares = 0
     }
 
     lancerDe(){

@@ -27,7 +27,7 @@ class Plateau{
             }else if (i === 20){//Parc Gratuit
                 Plateau.cases[i] = new Case("", "none", "parc.jpg", "")
             }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
-                Plateau.cases[i] = new Terrain("", "none", "gare.gif", 200, 100)
+                Plateau.cases[i] = new Terrain("", "none", "gare.gif", 200, 50)
             }else if (i<5){
                 Plateau.cases[i] = new Terrain("Terrains 1", "#9e6235", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<10){
