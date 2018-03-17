@@ -24,7 +24,7 @@ class Terrain extends Case{
             if (joueur.getArgent() >= this.valeur) {
                 Plateau.message += "\nVoulez-vous acheter le terrain ?";
             } else {
-                Plateau.message = "\nVous n'avez pas assez d'argent pour acheter ce terrain.";
+                Plateau.message += "\nVous n'avez pas assez d'argent pour acheter ce terrain.";
             }
         }else{
             if(this.proprietaire === joueur) {

@@ -1,14 +1,14 @@
 class Plateau{
 
-
+    /**
+     * Initialise l'état du jeu (joueurs, cases, plateau)
+     */
     static init(){
-        Plateau.nbJoueurPerdu = 0
-        Plateau.currentPlayer = 0
-        Plateau.cases = new Array(40)
-        Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)]
-        Plateau.message = ""
-        Plateau.continue = false
-        Plateau.achat = false
+        Plateau.nbJoueurPerdu = 0;
+        Plateau.currentPlayer = 0;
+        Plateau.cases = new Array(40);
+        Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)];
+        Plateau.message = "";
 
         for(var i=0; i < 40; i++){
             if(i === 0){
@@ -48,8 +48,11 @@ class Plateau{
         Plateau.lancerScenario();
     }
 
+    /**
+     * Lance une nouvelle partie
+     */
     static lancerScenario(){
-        Plateau.message = "Début de la partie"
+        Plateau.message = "Début de la partie";
         Plateau.initDisplay();
         Plateau.currentPlayer=-1;
     }
@@ -104,7 +107,7 @@ class Plateau{
         log.style.position="absolute";
         log.style.top="60%";
         log.style.left="10%";
-        log.style.height="10%";
+        log.style.height="14%";
         log.style.width="80%";
         log.style.display="flex";
         log.style.justifyContent="space-around";
@@ -130,7 +133,12 @@ class Plateau{
         }else{
             b2.innerText="OK";
         }
-        b2.addEventListener("click", Plateau.jouerUnTour);
+        if(!Plateau.getJoueurToPlay().aPerdu && Plateau.nbJoueurPerdu>=3){
+            b2.innerText="Rejouer";
+            b2.addEventListener("click", Plateau.init);
+        }else{
+            b2.addEventListener("click", Plateau.jouerUnTour);
+        }
         log.appendChild(mess);
         log.appendChild(b1);
         log.appendChild(b2);
@@ -268,7 +276,11 @@ class Plateau{
     static jouerUnTour(){
         Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4;
         let joueur = Plateau.getJoueurToPlay(); //Get le joueur actuel
-        if(!Plateau.joueurAPerdu(joueur)){ //Teste si le joueur n'a pas perdu
+        while(Plateau.joueurAPerdu(joueur)){ //Teste si le joueur n'a pas perdu
+            Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4;
+            joueur = Plateau.getJoueurToPlay(); //Get le joueur actuel
+        }
+        if(Plateau.nbJoueurPerdu<3){ //Teste si la partie n'est pas terminée
             let peutJouer = true;
             Plateau.message = "";
             if(joueur.getPrison() > 0) { //Joueur en prison
@@ -299,7 +311,7 @@ class Plateau{
                 Plateau.caseEffect(joueur, lancer)  //Déplacement du joueur sur case corresp et effet de la case
             }
         }else{
-            Plateau.currentPlayer = (Plateau.currentPlayer + 1) % 4;
+            Plateau.message="La partie est terminée!\nLe joueur "+joueur.getCouleur()+" a gagné et a le monopole. Félicitation à vous!";
             Plateau.initDisplay();
         }
     }

@@ -19,7 +19,7 @@ class Joueur{
             this.aPerdu = true;
             this.position = null;
             Plateau.nbJoueurPerdu += 1;
-            Plateau.message = "Vous n'avez plus d'argent, vous avez perdu.";
+            Plateau.message += "\nVous n'avez plus d'argent, vous avez perdu.";
             for(var i=0; i<40; i++){
                 if((Plateau.cases[i] instanceof Terrain == true) && (Plateau.cases[i].proprietaire != null) && (Plateau.cases[i].proprietaire.getCouleur() == this.getCouleur())){
                     Plateau.cases[i].proprietaire = null
