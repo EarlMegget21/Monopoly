@@ -16,7 +16,16 @@ class Case{
     }
 
     effect(joueur){
-        Plateau.message +="\nVous pouvez vous reposer à ce tour.";
+        if(this.getImage() === "parc.jpg"){
+            if(Plateau.cagnotte != 0) {
+                Plateau.message += "\nVous récupérez la cagnotte d'une valeur de " + Plateau.cagnotte + "€ !"
+                Plateau.cagnotte = 0
+            }else{
+                Plateau.message += "\nLa cagnotte est vide..."
+            }
+        }else {
+            Plateau.message += "\nVous pouvez vous reposer à ce tour.";
+        }
     }
 
     getImage(){

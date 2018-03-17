@@ -9,6 +9,7 @@ class Plateau{
         Plateau.cases = new Array(40);
         Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)];
         Plateau.message = "";
+        Plateau.cagnotte = 0
 
         for(var i=0; i < 40; i++){
             if(i === 0){
@@ -28,21 +29,21 @@ class Plateau{
             }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
                 Plateau.cases[i] = new Terrain("", "none", "gare.gif", 200, 100)
             }else if (i<5){
-                Plateau.cases[i] = new Terrain("Terrains 1", "#9e6235", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 1", "#9e6235", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<10){
-                Plateau.cases[i] = new Terrain("Terrains 2", "#82fcff", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 2", "#82fcff", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<15){
-                Plateau.cases[i] = new Terrain("Terrains 3", "#d972db", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 3", "#d972db", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<20){
-                Plateau.cases[i] = new Terrain("Terrains 4", "orange", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 4", "orange", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<25){
-                Plateau.cases[i] = new Terrain("Terrains 5", "#db7272", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 5", "#db7272", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<30){
-                Plateau.cases[i] = new Terrain("Terrains 6", "#dbd96b", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 6", "#dbd96b", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<35){
-                Plateau.cases[i] = new Terrain("Terrains 7", "#72db7f", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 7", "#72db7f", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else{
-                Plateau.cases[i] = new Terrain("Terrains 8", "#8284ff", "#", 100+((i+1)*20), ((i+1)*20))
+                Plateau.cases[i] = new Terrain("Terrains 8", "#8284ff", "#", 100+((i+1)*20), 30+((i+1)*10))
             }
         }
         Plateau.lancerScenario();
@@ -107,7 +108,7 @@ class Plateau{
         log.style.position="absolute";
         log.style.top="60%";
         log.style.left="10%";
-        log.style.height="14%";
+        //log.style.height="14%";   //En commentaire car avec le height=14% le texte va sur la case caisse
         log.style.width="80%";
         log.style.display="flex";
         log.style.justifyContent="space-around";
