@@ -9,6 +9,9 @@ class Plateau{
         Plateau.cases = new Array(40);
         Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)];
         Plateau.message = "";
+        Plateau.sound = new Audio()
+        Plateau.mainSound = new Audio('MainSong.mp3')
+        Plateau.mainSound.play()
         Plateau.cagnotte = 0
 
         for(var i=0; i < 40; i++){
@@ -283,6 +286,9 @@ class Plateau{
         }
         if(Plateau.nbJoueurPerdu<3){ //Teste si la partie n'est pas terminée
             let peutJouer = true;
+            Plateau.sound.pause()
+            Plateau.sound = new Audio('sf_cloche_ascenseur.mp3');
+            Plateau.sound.play();
             Plateau.message = "";
             if(joueur.getPrison() > 0) { //Joueur en prison
                 if (!joueur.testSortirDePrison()) { //N'arrive pas à sortir de prison
@@ -342,6 +348,15 @@ class Plateau{
     static caseEffect(joueur, lancer) {
         //on change la position du joueur
         joueur.position = (joueur.position + lancer) % 40; //Set new position
+        if (joueur.position === 20 ){
+            Plateau.sound.pause()
+            Plateau.sound = new Audio('parc.mp3');
+            Plateau.sound.play();
+        }else if ((joueur.position+5)%10 === 0){
+            Plateau.sound.pause()
+            Plateau.sound = new Audio('tchouvap.mp3');
+            Plateau.sound.play();
+        }
         Plateau.cases[joueur.position].effect(joueur); //Les effets de la case sont appliqués
 
         Plateau.initDisplay(); //On rafraichit l'affichage

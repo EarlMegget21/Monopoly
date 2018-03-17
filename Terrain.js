@@ -49,6 +49,9 @@ class Terrain extends Case{
 
     acheterTerrain(){ //listener du bouton "acheter"
         var joueur=Plateau.getJoueurToPlay();
+        Plateau.sound.pause()
+        Plateau.sound = new Audio('SFB-caisse2.mp3');
+        Plateau.sound.play();
         Plateau.message="L'achat a bien été clôturé.\nVous compte a été débité de "+this.valeur+" €";
         this.proprietaire = joueur;
         joueur.argent -= this.valeur;

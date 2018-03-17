@@ -2,6 +2,9 @@ var inc=-1;
 class Chance extends Case{
 
     effect(joueur) {
+        Plateau.sound.pause()
+        Plateau.sound = new Audio('harp.mp3');
+        Plateau.sound.play();
         var deplacement = Math.floor(Math.random() * Math.floor(3)) + 1; //Déplacement compris entre 1 et 3 cases
         var alea = Math.floor(Math.random() * Math.floor(2)); //avant/arrière -> Retourne 0 ou 1
         if(alea === 0){

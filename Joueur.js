@@ -27,12 +27,19 @@ class Joueur{
                 }
             }
         }
+
+        Plateau.sound.pause()
+        Plateau.sound = new Audio('Sans-titre.mp3');
+        Plateau.sound.play();
     }
 
     ajouterSous(valeur){
         if(!this.aPerdu){
             this.argent += valeur;
         }
+        Plateau.sound.pause()
+        Plateau.sound = new Audio('Sans-titre.mp3');
+        Plateau.sound.play();
     }
 
     testSortirDePrison(){
