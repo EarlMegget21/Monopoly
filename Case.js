@@ -19,6 +19,7 @@ class Case{
         if(this.getImage() === "parc.jpg"){
             if(Plateau.cagnotte != 0) {
                 Plateau.message += "\nVous récupérez la cagnotte d'une valeur de " + Plateau.cagnotte + "€ !"
+                joueur.ajouterSous(Plateau.cagnotte)
                 Plateau.cagnotte = 0
             }else{
                 Plateau.message += "\nLa cagnotte est vide..."
