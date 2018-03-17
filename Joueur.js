@@ -9,7 +9,7 @@ class Joueur{
     }
 
     lancerDe(){
-        return Math.floor(Math.random()*11)+1;
+        return Math.floor(Math.random()*6)+1 + Math.floor(Math.random()*6)+1   //Décompose le lancé en 2 lancés de dés de 6 car comme ça on a plus de chance de tomber sur 7 et sur 12 par ex
     }
 
     retirerSous(valeur){
@@ -19,15 +19,12 @@ class Joueur{
             this.aPerdu = true;
             this.position = null;
             Plateau.nbJoueurPerdu += 1;
-            /*for(let i=0;i<40;i++){ //pour retirer les propriétés des joueurs qui ont perdu (modifier les border en transparent)
-                let proprioCase = Plateau.cases[i].proprietaire;
-                if(proprioCase != null){
-                    if(proprioCase.couleur = this.couleur){
-                        Plateau.cases[i].proprietaire = null
-                    }
-                }
-            }*/
             Plateau.message = "Vous n'avez plus d'argent, vous avez perdu.";
+            for(var i=0; i<40; i++){
+                if((Plateau.cases[i] instanceof Terrain == true) && (Plateau.cases[i].proprietaire != null) && (Plateau.cases[i].proprietaire.getCouleur() == this.getCouleur())){
+                    Plateau.cases[i].proprietaire = null
+                }
+            }
         }
     }
 
@@ -40,7 +37,7 @@ class Joueur{
     testSortirDePrison(){
         let de1 = Math.floor(Math.random()*6)+1
         let de2 = Math.floor(Math.random()*6)+1
-        Plateau.message = "Votre lancé: " + de1 + " et " + de2
+        Plateau.message = "Votre lancé de dés: " + de1 + " et " + de2 +"\n"
         console.log('afficher');//Plateau.afficherMessage()
         if(de1 == de2){
             this.prison = 0

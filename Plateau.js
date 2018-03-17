@@ -276,16 +276,16 @@ class Plateau{
                     joueur.decPrison();
                     if (joueur.getPrison() === 0) { //On place le joueur sur la case visite
                         joueur.setPosition(10);
-                        Plateau.message = "La tentative a échoué mais vous serez libéré de prison au tour suivant.";
+                        Plateau.message += "La tentative d'évasion a échoué mais vous serez libéré de prison au tour suivant.";
                     } else {
-                        Plateau.message = "La tentative a échoué.\nVotre peine se termine dans "+joueur.prison+" tours.";
+                        Plateau.message += "La tentative d'évasion a échoué.\nVotre peine se termine dans "+joueur.prison+" tours.";
                     }
                     peutJouer = false;
                     Plateau.initDisplay();
                 } else { //On place le joueur sur la case visite
                     joueur.setPrison(0);
                     joueur.setPosition(10);
-                    Plateau.message = "Vous vous êtes évadé de prison, vous jouez!\n";
+                    Plateau.message += "Vous vous êtes évadé de prison, vous jouez!\n";
                 }
             }
 
