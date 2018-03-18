@@ -11,6 +11,7 @@ class Plateau{
         Plateau.message = "";
         Plateau.sound = new Audio()
         Plateau.mainSound = new Audio('MainSong.mp3')
+        Plateau.mainSound.loop=true
         Plateau.mainSound.play()
         Plateau.cagnotte = 0
 
@@ -50,6 +51,15 @@ class Plateau{
             }
         }
         Plateau.lancerScenario();
+    }
+
+    /**
+     * Listener pour rejouer
+     */
+    static replay(){
+        Plateau.mainSound.pause();
+        Plateau.mainSound.currentTime=0;
+        Plateau.init();
     }
 
     /**
@@ -134,15 +144,24 @@ class Plateau{
                 actuelle.acheterTerrain(); //Le click valide l'achat
             });
             b2.innerText="Passer";
+            b1.style.backgroundColor='transparent'
+            b1.style.borderColor='green'
+            b2.style.borderColor='red'
+            b1.style.borderRadius='15px'
         }else{
             b2.innerText="OK";
+            b2.style.borderColor='grey'
         }
         if(!Plateau.getJoueurToPlay().aPerdu && Plateau.nbJoueurPerdu>=3){
             b2.innerText="Rejouer";
-            b2.addEventListener("click", Plateau.init);
+            b2.addEventListener("click", Plateau.replay);
+            b2.style.borderColor='white'
+            b2.style.backgroundColor='white'
         }else{
             b2.addEventListener("click", Plateau.jouerUnTour);
+            b2.style.backgroundColor='transparent'
         }
+        b2.style.borderRadius='15px'
         log.appendChild(mess);
         log.appendChild(b1);
         log.appendChild(b2);
