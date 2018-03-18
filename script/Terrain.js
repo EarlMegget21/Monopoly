@@ -11,10 +11,6 @@ class Terrain extends Case{
         return this.valeur
     }
 
-    getLoyer(){
-        return this.loyer
-    }
-
     getProprietaire(){
         return this.proprietaire
     }
@@ -34,7 +30,7 @@ class Terrain extends Case{
                 Plateau.message += "\nLe joueur " + this.proprietaire.getCouleur() + " est en prison, vous ne devez rien.";
 
             } else {
-                if(this.getImage() === "gare.gif"){
+                if(this.getImage() === "img/gare.gif"){
                     Plateau.message += "\nVous avez payé votre loyer de " + this.loyer * this.proprietaire.nbGares+ "€ au joueur " + this.proprietaire.getCouleur()+".";
                     joueur.retirerSous(this.loyer * this.proprietaire.nbGares);
                     this.proprietaire.ajouterSous(this.loyer * this.proprietaire.nbGares);
@@ -50,12 +46,12 @@ class Terrain extends Case{
     acheterTerrain(){ //listener du bouton "acheter"
         var joueur=Plateau.getJoueurToPlay();
         Plateau.sound.pause()
-        Plateau.sound = new Audio('SFB-caisse2.mp3');
+        Plateau.sound = new Audio('son/SFB-caisse2.mp3');
         Plateau.sound.play();
         Plateau.message="L'achat a bien été clôturé.\nVous compte a été débité de "+this.valeur+" €";
         this.proprietaire = joueur;
         joueur.argent -= this.valeur;
-        if(Plateau.cases[joueur.position].getImage() === "gare.gif"){
+        if(Plateau.cases[joueur.position].getImage() === "img/gare.gif"){
             joueur.nbGares += 1
         }
         Plateau.initDisplay(); //met à jour l'affichage pour confirmer l'achat

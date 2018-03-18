@@ -29,7 +29,7 @@ class Joueur{
         }
 
         Plateau.sound.pause()
-        Plateau.sound = new Audio('Sans-titre.mp3');
+        Plateau.sound = new Audio('son/Sans-titre.mp3');
         Plateau.sound.play();
     }
 
@@ -38,7 +38,7 @@ class Joueur{
             this.argent += valeur;
         }
         Plateau.sound.pause()
-        Plateau.sound = new Audio('Sans-titre.mp3');
+        Plateau.sound = new Audio('son/Sans-titre.mp3');
         Plateau.sound.play();
     }
 
@@ -46,7 +46,6 @@ class Joueur{
         let de1 = Math.floor(Math.random()*6)+1
         let de2 = Math.floor(Math.random()*6)+1
         Plateau.message = "Votre lancé de dés: " + de1 + " et " + de2 +"\n"
-        console.log('afficher');//Plateau.afficherMessage()
         if(de1 == de2){
             this.prison = 0
             return true

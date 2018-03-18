@@ -10,28 +10,28 @@ class Plateau{
         Plateau.tabjoueur = [new Joueur("red", 1500),new Joueur("green", 1500),new Joueur("yellow", 1500),new Joueur("blue", 1500)];
         Plateau.message = "";
         Plateau.sound = new Audio()
-        Plateau.mainSound = new Audio('MainSong.mp3')
+        Plateau.mainSound = new Audio('son/MainSong.mp3')
         Plateau.mainSound.loop=true
         Plateau.mainSound.play()
         Plateau.cagnotte = 0
 
         for(var i=0; i < 40; i++){
             if(i === 0){
-                Plateau.cases[i] = new GainPerte("", "none", "go.gif", 400)
+                Plateau.cases[i] = new GainPerte("", "none", "img/go.gif", 400)
             }else if ( i === 3 || i === 17 || i === 32){ //Caisse de Communauté
-                Plateau.cases[i] = new Tresors("", "none", "caisse.gif", "")
+                Plateau.cases[i] = new Tresors("", "none", "img/caisse.gif", "")
             }else if( i === 12 || i === 28){ //Taxe
-                Plateau.cases[i] = new GainPerte("", "none", "tax1.png", -150)
+                Plateau.cases[i] = new GainPerte("", "none", "img/tax1.png", -150)
             }else if ( i === 38 || i === 22 || i === 7){ //Chance
                 Plateau.cases[i] = new Chance("", "none", "", "")
             }else if (i === 30){//Prison
                 Plateau.cases[i] = new Prison("", "none", "", "Allez\nen\nprison")
             }else if (i === 10){//Simple Visite
-                Plateau.cases[i] = new Case("", "none", "visit.jpg", "Simple\nVisite")
+                Plateau.cases[i] = new Case("", "none", "img/visit.jpg", "Simple\nVisite")
             }else if (i === 20){//Parc Gratuit
-                Plateau.cases[i] = new Case("", "none", "parc.jpg", "")
+                Plateau.cases[i] = new Case("", "none", "img/parc.jpg", "")
             }else if (i === 5 || i === 15 || i === 25 || i === 35){//Gare
-                Plateau.cases[i] = new Terrain("", "none", "gare.gif", 200, 50)
+                Plateau.cases[i] = new Terrain("", "none", "img/gare.gif", 200, 50)
             }else if (i<5){
                 Plateau.cases[i] = new Terrain("Terrains 1", "#9e6235", "#", 100+((i+1)*20), 30+((i+1)*10))
             }else if (i<10){
@@ -172,7 +172,7 @@ class Plateau{
         plateau.style.flexDirection='column';
         plateau.style.height="715px";
         plateau.style.backgroundColor='#b1ccba';
-        plateau.style.backgroundImage="url(logo.png)";
+        plateau.style.backgroundImage="url(img/logo.png)";
         plateau.style.backgroundRepeat="no-repeat";
         plateau.style.backgroundSize="40%";
         plateau.style.backgroundPosition="center";
@@ -264,13 +264,13 @@ class Plateau{
 
                 if(i===8 && (j===3 || j===7)){ //case des cartes (juste pour le style)
                     if(j===3){
-                        col.style.backgroundImage="url(caisse.gif)"
+                        col.style.backgroundImage="url(img/caisse.gif)"
                         col.style.backgroundRepeat="no-repeat";
                         col.style.backgroundSize="contain";
                         col.style.backgroundPosition="center";
                     }
                     if(j===7){
-                        col.style.backgroundImage="url(chance0.png)"
+                        col.style.backgroundImage="url(img/chance0.png)"
                         col.style.backgroundRepeat="no-repeat";
                         col.style.backgroundSize="contain";
                         col.style.backgroundPosition="center";
@@ -306,7 +306,7 @@ class Plateau{
         if(Plateau.nbJoueurPerdu<3){ //Teste si la partie n'est pas terminée
             let peutJouer = true;
             Plateau.sound.pause()
-            Plateau.sound = new Audio('sf_cloche_ascenseur.mp3');
+            Plateau.sound = new Audio('son/sf_cloche_ascenseur.mp3');
             Plateau.sound.play();
             Plateau.message = "";
             if(joueur.getPrison() > 0) { //Joueur en prison
@@ -369,11 +369,11 @@ class Plateau{
         joueur.position = (joueur.position + lancer) % 40; //Set new position
         if (joueur.position === 20 ){
             Plateau.sound.pause()
-            Plateau.sound = new Audio('parc.mp3');
+            Plateau.sound = new Audio('son/parc.mp3');
             Plateau.sound.play();
         }else if ((joueur.position+5)%10 === 0){
             Plateau.sound.pause()
-            Plateau.sound = new Audio('tchouvap.mp3');
+            Plateau.sound = new Audio('son/tchouvap.mp3');
             Plateau.sound.play();
         }
         Plateau.cases[joueur.position].effect(joueur); //Les effets de la case sont appliqués

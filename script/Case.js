@@ -16,7 +16,7 @@ class Case{
     }
 
     effect(joueur){
-        if(this.getImage() === "parc.jpg"){
+        if(this.getImage() === "img/parc.jpg"){
             if(Plateau.cagnotte != 0) {
                 Plateau.message += "\nVous récupérez la cagnotte d'une valeur de " + Plateau.cagnotte + "€ !"
                 joueur.ajouterSous(Plateau.cagnotte)
